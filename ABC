@@ -61,7 +61,6 @@ int faculty_Queue(int no_of_process, int quantum_time)
         
         for (int count = 0; count < no_of_process; count++)
         {
-        	//here it checks whether there is any process present int the round robin queue if z incrememtns by 1.
             if (total_time >= faculty_Process[count].arrival_time)
             {
                 z = 0;
@@ -72,7 +71,6 @@ int faculty_Queue(int no_of_process, int quantum_time)
                         z++;
                     }
                 }
-                //if z is 0 then it will add the process to the round robin queue.
                 if (z == 0)
                 {
                     queue++;
@@ -134,7 +132,7 @@ int faculty_Queue(int no_of_process, int quantum_time)
     int total_waiting_time = 0;
     int total_turnaround_time = 0;
 
-    for (int count = 0; count < no_of_process; count++) //used to itterate over the all process
+    for (int count = 0; count < no_of_process; count++) 
     {
         int waiting_time = faculty_Process[count].completion_time - faculty_Process[count].burst_time - faculty_Process[count].arrival_time;
         total_waiting_time += waiting_time;
