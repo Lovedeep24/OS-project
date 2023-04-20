@@ -49,7 +49,7 @@ int faculty_Queue(int no_of_process, int quantum_time)
 
     int total_time = 0;
     int queue = 0;
-    int round_robin[20];
+    int round_robin[100];
     round_robin[queue] = 0;
 
     int flag = 1;
@@ -58,8 +58,10 @@ int faculty_Queue(int no_of_process, int quantum_time)
     do
     {
         flag = 0;
+        
         for (int count = 0; count < no_of_process; count++)
         {
+        	//here it checks whether there is any process present int the round robin queue if z incrememtns by 1.
             if (total_time >= faculty_Process[count].arrival_time)
             {
                 z = 0;
@@ -70,6 +72,7 @@ int faculty_Queue(int no_of_process, int quantum_time)
                         z++;
                     }
                 }
+                //if z is 0 then it will add the process to the round robin queue.
                 if (z == 0)
                 {
                     queue++;
@@ -90,7 +93,7 @@ int faculty_Queue(int no_of_process, int quantum_time)
             }
             if (n > queue)
             {
-                n = (n - 1) % queue;
+                n = (n - 1) % queue;//remainder
             }
         }
         if (faculty_Process[round_robin[n]].remaining > 0)
@@ -124,14 +127,14 @@ int faculty_Queue(int no_of_process, int quantum_time)
     cout << "-------------------------------------" << endl;
     for (int count = 0; count < no_of_process; count++)
     {
-        cout << "| \t " << faculty_Process[count].process_name << "\t\t | \t\t " << faculty_Process[count].completion_time << "\t\t|" << endl;
+        cout << "| \t " << faculty_Process[count].process_name << "\t\t      | \t\t " << faculty_Process[count].completion_time << "\t\t  |" << endl;
         cout << "-------------------------------------" << endl;
     }
 
     int total_waiting_time = 0;
     int total_turnaround_time = 0;
 
-    for (int count = 0; count < no_of_process; count++)
+    for (int count = 0; count < no_of_process; count++) //used to itterate over the all process
     {
         int waiting_time = faculty_Process[count].completion_time - faculty_Process[count].burst_time - faculty_Process[count].arrival_time;
         total_waiting_time += waiting_time;
